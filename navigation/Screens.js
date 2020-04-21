@@ -10,11 +10,12 @@ import { Block } from "galio-framework";
 // screens
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
-import Pro from "../screens/Pro";   
+import Pro from "../screens/Pro";    
 import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
+import Login from "../screens/Login";
 // drawer
 import CustomDrawerContent from "./Menu";
 
@@ -172,25 +173,54 @@ function HomeStack(props) {
           ),
           headerTransparent: true
         }}
-      />
+      /> 
     </Stack.Navigator>
   );
 }
-
-export default function OnboardingStack(props) {
+// export default function OnboardingStack(props) {
+//   return (
+//     <Stack.Navigator mode="card" headerMode="none">
+//       <Stack.Screen
+//         name="Onboarding"
+//         component={Onboarding}
+//         option={{
+//           headerTransparent: true
+//         }}
+//       />
+//       <Stack.Screen name="App" component={AppStack} />
+//     </Stack.Navigator>
+//   );   
+// }
+function RegisterStack(props) { 
   return (
     <Stack.Navigator mode="card" headerMode="none">
       <Stack.Screen
-        name="Onboarding"
-        component={Onboarding}
+        name="Register"
+        component={Register}
         option={{
           headerTransparent: true
         }}
-      />
+      /> 
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
   );
 }
+export default function OnboardingStack(props) { 
+  return (
+    <Stack.Navigator mode="card" headerMode="none">
+      <Stack.Screen
+        name="login"
+        component={Login}
+        option={{
+          headerTransparent: true
+        }}
+      /> 
+      <Stack.Screen name="App" component={AppStack} />
+      <Stack.Screen name="Register" component={RegisterStack} />
+    </Stack.Navigator>
+  );
+}
+
 
 function AppStack(props) {
   return (
@@ -225,7 +255,7 @@ function AppStack(props) {
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
-      <Drawer.Screen name="Account" component={Register} />
+      <Drawer.Screen name="Account" component={RegisterStack} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
     </Drawer.Navigator>

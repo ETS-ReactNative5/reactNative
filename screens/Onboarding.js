@@ -15,6 +15,7 @@ import Images from "../constants/Images";
 
 class Onboarding extends React.Component {
   render() {
+    console.log('constants constants constants constants constants constants');
     const { navigation } = this.props;
 
     return (
