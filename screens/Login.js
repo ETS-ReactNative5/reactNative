@@ -14,18 +14,33 @@ import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
 
 const { width, height } = Dimensions.get("screen");
-const { FaIcon, FaStack } = require('react-fa-icon');
+import AnimatedLoader from "react-native-animated-loader";
+import { Loader } from "./Load";
 
 class Login extends React.Component {
   constructor(props){
     super(props);
-    this.state = {}
+    this.state = {
+      visible: false,
+      password: '',
+      username: '',
+    }
+  }
+
+  onLogin = () => {
+    const { navigation } = this.props;
+    //this.setState({visible: true});
+    if(this.state.username === 'user'){
+      this.setState({visible: false});
+    }
+      navigation.navigate("App")
+    return;
   }
   render() {
     const { navigation } = this.props;
     return (
       <Block flex middle>
-        <StatusBar hidden />
+        <StatusBar hidden /> 
         <ImageBackground
           source={Images.RegisterBackground}
           style={{ width, height, zIndex: 1 }}
@@ -98,6 +113,10 @@ class Login extends React.Component {
                       <Input
                         borderless
                         placeholder="Username"
+                        onChangeText={(us) => {
+                          this.setState({username: us});
+                          console.log(us);
+                        }}
                         iconContent={
                           <Icon
                             size={16}
@@ -114,6 +133,10 @@ class Login extends React.Component {
                         password
                         borderless
                         placeholder="Password"
+                        onChangeText={(us) => {
+                          this.setState({password: us});
+                          console.log(us);
+                        }}
                         iconContent={
                           <Icon
                             size={16}
@@ -124,17 +147,17 @@ class Login extends React.Component {
                           />
                         }
                       />
-                    {/*                      
-                      <Block row style={styles.passwordCheck}>
-                        <Text size={12} color={argonTheme.COLORS.MUTED}>
-                          password strength:
-                        </Text>
-                        <Text bold size={12} color={argonTheme.COLORS.SUCCESS}>
-                          {" "}
-                          strong
-                        </Text>
+                    {                      
+                      <Block row >
+                        <AnimatedLoader
+                          visible={this.state.visible}
+                          overlayColor="rgba(255,255,255,0.75)"
+                          source={Loader}
+                          animationStyle={styles.lottie}
+                          speed={1}
+                        />
                       </Block>
-                    */}
+                    }
                     </Block>
                   {/*
                     <Block row width={width * 0.75}>
@@ -160,9 +183,8 @@ class Login extends React.Component {
                     <Block middle>
                       <Button color="primary" 
                         style={styles.createButton}
-                        onPress={() => navigation.navigate("App")}
+                        onPress={() => this.onLogin()}
                       >
-                        <FaIcon icon="spinner" spin />
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                           SE CONNECTER
                         </Text>
@@ -189,22 +211,7 @@ class Login extends React.Component {
   }
 }
 
-class Loader extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {}
-  }
-  render(){
-    //const loading = this.props.loading;
-    return(
-      <Modal
-        transparent={true}
-        //animationType={'none'}
-        visible={true}>
-      </Modal>
-    )
-  }
-}
+
 
 const styles = StyleSheet.create({
   registerContainer: {
@@ -256,12 +263,11 @@ const styles = StyleSheet.create({
   createButton: {
     width: width * 0.5,
     marginTop: 25
+  },
+  lottie: {
+    width: 100,
+    height: 100
   }
 });
 
 export default Login;
-
-
-
-
-

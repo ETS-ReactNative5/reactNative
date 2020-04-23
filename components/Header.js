@@ -3,10 +3,12 @@ import { withNavigation } from '@react-navigation/compat';
 import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 
+
 import Icon from './Icon';
 import Input from './Input';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
+import { connect } from 'react-redux'
 
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
@@ -46,6 +48,9 @@ const SearchButton = ({isWhite, style, navigation}) => (
 );
 
 class Header extends React.Component {
+  constructor(props){
+    super(props);
+  }
   handleLeftPress = () => {
     const { back, navigation } = this.props;
     return (back ? navigation.goBack() : navigation.openDrawer());
@@ -106,6 +111,7 @@ class Header extends React.Component {
     }
   }
   renderSearch = () => {
+    console.log(this.props)
     const { navigation } = this.props;
     return (
       <Input
@@ -124,17 +130,18 @@ class Header extends React.Component {
 
     return (
       <Block row style={styles.options}>
-        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Pro')}>
+        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => this.props.showCenterFunction()}>
           <Block row middle>
             <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
-            <Text size={16} style={styles.tabTitle}>{optionLeft || 'Beauty'}</Text>
+            <Text size={16} style={styles.tabTitle}>{'Centres'}</Text>
           </Block>
         </Button>
-        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('Pro')}>
+        <Button shadowless style={styles.tab} onPress={() => this.props.showLocalisationFunction()}>
           <Block row middle>
             <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
-            <Text size={16} style={styles.tabTitle}>{optionRight || 'Fashion'}</Text>
-          </Block>
+            <Text size={16} style={{...styles.tabTitle, textAlign: 'center'}}>
+            {'Localisation'}</Text>
+          </Block> 
         </Button>
       </Block>
     );
@@ -278,4 +285,24 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(Header);
+
+const mapStateToProps = (state) => {
+  return state
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    showLocalisationFunction: async () => {
+      dispatch({type: "SHOW_LOCALISATION"});
+    },
+    showCenterFunction:  async () => {
+      dispatch({type: "SHOW_CENTER"});
+    },
+    showMesureFunction:  async () => {
+      dispatch({type: "SHOW_MESURE"});
+    }
+  };
+}
+
+export default withNavigation(connect(mapStateToProps,mapDispatchToProps)(Header))
+

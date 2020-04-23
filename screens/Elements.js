@@ -4,13 +4,14 @@ import { ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-nati
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
 import { argonTheme, tabs } from "../constants/";
-import { Button, Select, Icon, Input, Header, Switch } from "../components/";
-
+import { Button, Select, Icon, Input, Switch } from "../components/";
+import Header  from "../components/Header";
+ 
 const { width } = Dimensions.get("screen");
 
 class Elements extends React.Component {
   state = {
-    "switch-1": true,
+    "switch-1": true, 
     "switch-2": false
   };
 

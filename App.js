@@ -11,6 +11,8 @@ enableScreens();
 
 import Screens from "./navigation/Screens";
 import { Images, articles, argonTheme } from "./constants";
+import { Provider } from 'react-redux'
+import app from './reducer/appStore'
 
 // cache app images 
 const assetImages = [    
@@ -44,7 +46,7 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isLoadingComplete) {
       return (
-        <AppLoading
+        <AppLoading 
           startAsync={this._loadResourcesAsync}
           onError={this._handleLoadingError}
           onFinish={this._handleFinishLoading}
@@ -52,13 +54,15 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <NavigationContainer>
-          <GalioProvider theme={argonTheme}>
-            <Block flex>
-              <Screens />
-            </Block>
-          </GalioProvider>
-        </NavigationContainer>
+        <Provider store={app}>
+          <NavigationContainer>
+            <GalioProvider theme={argonTheme}>
+              <Block flex>
+                <Screens />
+              </Block>
+            </GalioProvider>
+          </NavigationContainer>
+        </Provider>
       );
     }
   }

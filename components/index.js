@@ -6,6 +6,7 @@ import Header from './Header';
 import Input from './Input';
 import Switch from './Switch';
 import Select from './Select';
+import CardMesure from './CardMesure';
 
 export {
   Button,
@@ -13,7 +14,8 @@ export {
   DrawerItem,
   Icon,
   Input,
-  Header,
+  //Header,
   Switch, 
-  Select
+  Select,
+  CardMesure
 };

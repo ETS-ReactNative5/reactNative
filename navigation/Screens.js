@@ -20,7 +20,8 @@ import Login from "../screens/Login";
 import CustomDrawerContent from "./Menu";
 
 // header for screens
-import { Icon, Header } from "../components"; 
+import { Icon } from "../components"; 
+import Header  from "../components/Header"; 
 import { argonTheme, tabs } from "../constants";
 
 const { width } = Dimensions.get("screen");
@@ -149,9 +150,10 @@ function HomeStack(props) {
             <Header
               title="Home"
               search
-              options
+              // options
+              tabs={tabs.categories}
               navigation={navigation}
-              scene={scene}
+              // scene={scene}
             />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" }
@@ -169,7 +171,7 @@ function HomeStack(props) {
               transparent
               navigation={navigation}
               scene={scene}
-            />
+            /> 
           ),
           headerTransparent: true
         }}
