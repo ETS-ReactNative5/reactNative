@@ -6,12 +6,14 @@ import {
   StatusBar,
   KeyboardAvoidingView,
   Modal,
-  ActivityIndicator
+  ActivityIndicator,
+  Image
 } from "react-native";
 import { Block, Checkbox, Text, theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
+
 
 const { width, height } = Dimensions.get("screen");
 import AnimatedLoader from "react-native-animated-loader";
@@ -48,9 +50,7 @@ class Login extends React.Component {
           <Block flex middle>
             <Block style={styles.registerContainer}>
               <Block flex={0.25} middle style={styles.socialConnect}>
-                <Text color="#8898AA" size={12}>
-                  CONNEXION
-                </Text>
+                <Image styles={styles.logo} source={Images.mamedLogo} />
                 {/*
                   <Block row style={{ marginTop: theme.SIZES.BASE }}>
                     <Button style={{ ...styles.socialButtons, marginRight: 30 }}>
@@ -191,14 +191,16 @@ class Login extends React.Component {
                       </Button>
                     </Block>
                     <Block middle>
-                      <Button color="primary"  
-                        style={styles.createButton}
-                        onPress={() => navigation.navigate("Register")}
-                      >
-                        <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                          CREER UN COMPTE
-                        </Text>
-                      </Button>
+                      
+                    </Block>
+                    <Block middle flex={0.44}>
+                      <Text bold size={14} 
+                        color={argonTheme.COLORS.WHITE}
+                         onPress={() => navigation.navigate("Register")}
+                         style={styles.text}
+                        >
+                        CREER UN COMPTE
+                      </Text>
                     </Block>
                   </KeyboardAvoidingView>
                 </Block>
@@ -254,6 +256,10 @@ const styles = StyleSheet.create({
   },
   inputIcons: {
     marginRight: 12
+  },
+  text: {
+    color: "#399BD6", 
+    // marginTop: "15px"
   },
   passwordCheck: {
     paddingLeft: 15,

@@ -118,7 +118,7 @@ class Header extends React.Component {
         right
         color="black"
         style={styles.search}
-        placeholder="What are you looking for?"
+        placeholder="Taper pour rechercher ?"
         placeholderTextColor={'#8898AA'}
         onFocus={() => navigation.navigate('Pro')}
         iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
@@ -156,7 +156,11 @@ class Header extends React.Component {
       <Tabs
         data={tabs || []}
         initialIndex={tabIndex || defaultTab}
-        onChange={id => navigation.setParams({ tabId: id })} />
+        onChange={id => { 
+          navigation.setParams({ tabId: id }); 
+          this.props.showElementFunction(id);
+          console.log('<------------------->',id);
+        }} />
     )
   }
   renderHeader = () => {
@@ -294,6 +298,9 @@ const mapDispatchToProps = dispatch => {
   return {
     showLocalisationFunction: async () => {
       dispatch({type: "SHOW_LOCALISATION"});
+    },
+    showElementFunction: async (id) => {
+      dispatch({type: "SHOW_ELEMENT", id: id});
     },
     showCenterFunction:  async () => {
       dispatch({type: "SHOW_CENTER"});

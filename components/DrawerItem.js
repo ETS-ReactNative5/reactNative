@@ -7,10 +7,10 @@ import argonTheme from "../constants/Theme";
 
 class DrawerItem extends React.Component {
   renderIcon = () => {
-    const { title, focused } = this.props;
+    const { title, focused, display } = this.props;
 
-    switch (title) {
-      case "Home":
+    switch (display) {
+      case "Journal":
         return (
           <Icon
             name="shop"
@@ -19,7 +19,7 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
-      case "Elements":
+      case "Messages":
         return (
           <Icon
             name="map-big"
@@ -28,7 +28,7 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.ERROR}
           />
         );
-      case "Articles":
+      case "Données":
         return (
           <Icon
             name="spaceship"
@@ -70,7 +70,7 @@ class DrawerItem extends React.Component {
   };
 
   render() {
-    const { focused, title, navigation } = this.props;
+    const { focused, title, navigation, display } = this.props;
 
     const containerStyles = [
       styles.defaultStyle,
@@ -98,7 +98,7 @@ class DrawerItem extends React.Component {
               bold={focused ? true : false}
               color={focused ? "white" : "rgba(0,0,0,0.5)"}
             >
-              {title}
+              {display}
             </Text>
           </Block>
         </Block>

@@ -1,8 +1,9 @@
 export default tabs = {
   categories: [
-    { id: 'popular', title: 'Popular' },
-    { id: 'beauty', title: 'Beauty' },
-    { id: 'fashion', title: 'Fashion' },
-    { id: 'car_motorcycle', title: 'Car & Motorcycle' },
+    { id: 'activite', title: 'Activités' },
+    { id: 'antecedent', title: 'Antécedents' },
+    { id: 'centre', title: 'Centres' },
+    { id: 'geolocalisation', title: 'Géolocalisation' },
+    { id: 'aprops', title: 'A Propos' },
   ],
 }

@@ -14,6 +14,7 @@ import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
+import Messages from "../screens/Messages";
 import Articles from "../screens/Articles";
 import Login from "../screens/Login";
 // drawer
@@ -34,11 +35,44 @@ function ElementsStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
-        name="Elements"
+        name="Données"
         component={Elements}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Elements" navigation={navigation} scene={scene} />
+            <Header title="Données" navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" }
+        }}
+      />
+            <Stack.Screen
+        name="Pro"
+        component={Pro}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function MessagesStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="Messages"
+        component={Messages}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Messages" navigation={navigation} scene={scene} />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" }
         }}
@@ -67,7 +101,7 @@ function ElementsStack(props) {
 function ArticlesStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
-      <Stack.Screen
+      <Stack.Screen 
         name="Articles"
         component={Articles}
         options={{
@@ -143,12 +177,12 @@ function HomeStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
-        name="Home"
+        name="Journal"
         component={Home}
         options={{
           header: ({ navigation, scene }) => (
             <Header
-              title="Home"
+              title="Journal"
               search
               // options
               tabs={tabs.categories}
@@ -259,6 +293,7 @@ function AppStack(props) {
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Account" component={RegisterStack} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
+      <Drawer.Screen name="Messages" component={MessagesStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
     </Drawer.Navigator>
   );
