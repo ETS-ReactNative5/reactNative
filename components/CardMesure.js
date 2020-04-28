@@ -8,6 +8,9 @@ import { argonTheme } from '../constants';
 
 
 class CardMesure extends React.Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
     
@@ -23,7 +26,7 @@ class CardMesure extends React.Component {
 
     return ( 
       <Block row={horizontal} card flex style={cardContainer}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
+        <TouchableWithoutFeedback onPress={() => {this.props.showDetail(1); console.log("on pass")}}>
           <Block flex space="between" style={styles.cardDescription}>
             <Text size={14} style={styles.cardTitle} style={{textAlign: "center"}}>
             	Mardi 12/04/2020 12h30

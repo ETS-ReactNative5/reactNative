@@ -9,20 +9,56 @@ import articles from '../constants/articles';
 const { width } = Dimensions.get('screen'); 
 import { connect } from 'react-redux'
 import Images from "../constants/Images";
-
+import Modal, { SlideAnimation, ModalContent, ModalTitle } from 'react-native-modals';
+import { Button } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 
 class Home extends React.Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      bottomModalAndTitle: false,
+    }
   }
 
- 
+ showDetail = (id) => {
+  this.setState({bottomModalAndTitle: true})
+ }
 
   render() {
     console.log(this.props);
     return (
       <Block flex center style={styles.home}>
+        <Modal.BottomModal
+          visible={this.state.bottomModalAndTitle}
+          onTouchOutside={() => this.setState({ bottomModalAndTitle: false })}
+          height={0.95}
+          width={1}
+          onSwipeOut={() => this.setState({ bottomModalAndTitle: false })}
+          modalTitle={
+            <ModalTitle
+              title="Bottom Modal"
+              hasTitleBar
+            />
+          }
+        >
+          <ModalContent
+            style={{
+              flex: 1, 
+              backgroundColor: 'fff',
+            }}
+          >
+            <Block row space="evenly"> 
+              <Block flex left>
+                <Text>Mardi 12/04/2020 12h30</Text>
+              </Block>
+              <Block  right>
+                <Ionicons name="md-checkmark-circle" size={25} color="green" />
+              </Block>
+            </Block>
+          </ModalContent>
+        </Modal.BottomModal>
         <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.articles}>
@@ -30,10 +66,10 @@ class Home extends React.Component {
             {this.props.currentItem === "activite" ?
             <Block flex>
               {/*<Text size={24} style={{textAlign: "center"}}>Activitées</Text>*/}
-              <CardMesure item={articles[0]} horizontal  /> 
-              <CardMesure item={articles[0]} horizontal  /> 
-              <CardMesure item={articles[0]} horizontal  /> 
-              <CardMesure item={articles[0]} horizontal  /> 
+              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
+              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
+              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
+              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
             </Block>: null
             }
             {this.props.currentItem === "centre" ?

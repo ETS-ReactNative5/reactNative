@@ -17,6 +17,7 @@ import Elements from "../screens/Elements";
 import Messages from "../screens/Messages";
 import Articles from "../screens/Articles";
 import Login from "../screens/Login";
+import EditProfile from "../screens/EditProfile";
 // drawer
 import CustomDrawerContent from "./Menu";
 
@@ -92,6 +93,22 @@ function MessagesStack(props) {
             />
           ),
           headerTransparent: true
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function EditProfileStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Edit Profile" navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" }
         }}
       />
     </Stack.Navigator>
@@ -294,6 +311,7 @@ function AppStack(props) {
       <Drawer.Screen name="Account" component={RegisterStack} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Messages" component={MessagesStack} />
+      <Drawer.Screen name="EditProfile" component={EditProfileStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
     </Drawer.Navigator>
   );
