@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon as Icons } from 'galio-framework'
+//import { Icon as Icons } from 'galio-framework'
 import { ScrollView, StyleSheet, Dimensions, TouchableOpacity, Image } from "react-native";
 // Galio components
 import { Block, Text, theme } from "galio-framework";
@@ -13,8 +13,9 @@ import { Centre } from '../components';
 import articles from '../constants/articles';
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
+
 import {
-  ImageBackground,
+  ImageBackground, 
   StatusBar,
   KeyboardAvoidingView,
   ActivityIndicator
@@ -63,16 +64,10 @@ class EditProfile extends React.Component {
 				                          this.setState({nom: us});
 				                          console.log(us);
 				                        }}
-				                        // iconContent={
-		                          // 				<Icons
-		                          //   				size={16}
-		                          //   				color={argonTheme.COLORS.ICON}
-		                          //   				name="verticleleft"
-		                          //   				family="ArgonExtra"
-		                          //   				style={styles.inputIcons}
-		                         	// 			 />
-		                        		// 		}
-					                     />
+				                        iconContent={
+	                          				<Ionicons name="md-person" style={styles.inputIcons} size={18} color="#343D46" />
+		                        			}
+					                    />
 				                    </Block>
 				                    <Block width={width * 0.8}>
 				                      <Input
@@ -82,6 +77,9 @@ class EditProfile extends React.Component {
 				                          this.setState({prenom: us});
 				                          console.log(us);
 				                        }}
+				                        iconContent={
+	                          				<Ionicons name="md-person" style={styles.inputIcons} size={18} color="#343D46" />
+		                        		}
 				                        
 				                      />
 				                    </Block>
@@ -93,6 +91,9 @@ class EditProfile extends React.Component {
 				                          this.setState({email: us});
 				                          console.log(us);
 				                        }}
+				                        iconContent={
+	                          				<Ionicons name="md-mail" style={styles.inputIcons} size={18} color="#343D46" />
+		                        		}
 				                        
 				                      />
 				                    </Block>
@@ -104,7 +105,9 @@ class EditProfile extends React.Component {
 				                          this.setState({tel: us});
 				                          console.log(us);
 				                        }}
-				                        
+				                        iconContent={
+	                          				<Ionicons name="md-phone-portrait" style={styles.inputIcons} size={18} color="#343D46" />
+	                        				}
 				                      />
 				                    </Block>
 				                    <Block width={width * 0.8}>
@@ -115,6 +118,15 @@ class EditProfile extends React.Component {
 				                          this.setState({ddn: us});
 				                          console.log(us);
 				                        }}
+				                        iconContent={
+	                          				<Icon
+	                            				size={16}
+	                            				color={argonTheme.COLORS.ICON}
+	                            				name="calendar-date"
+	                            				family="ArgonExtra"
+	                            				style={styles.inputIcons}
+	                         				 />
+	                         			}
 				                        
 				                      />
 				                    </Block>
@@ -126,6 +138,10 @@ class EditProfile extends React.Component {
 				                          this.setState({addresse: us});
 				                          console.log(us);
 				                        }}
+
+				                         iconContent={
+	                          				<Ionicons name="md-card" style={styles.inputIcons} size={18} color="#343D46" />
+	                        			}
 				                        
 				                      />
 				                    </Block>
@@ -140,6 +156,15 @@ class EditProfile extends React.Component {
 				                          this.setState({username: us});
 				                          console.log(us);
 				                        }}
+				                        iconContent={
+	                          				<Icon
+					                            size={16}
+					                            color={argonTheme.COLORS.ICON}
+					                            name="ic_mail_24px"
+					                            family="ArgonExtra"
+					                            style={styles.inputIcons}
+					                          />
+	                        				}
 				                        
 				                      />
 				                    </Block>					                
@@ -152,6 +177,15 @@ class EditProfile extends React.Component {
 				                          this.setState({password: us});
 				                          console.log(us);
 				                        }}
+				                        iconContent={
+				                          <Icon
+				                            size={16}
+				                            color={argonTheme.COLORS.ICON}
+				                            name="padlock-unlocked"
+				                            family="ArgonExtra"
+				                            style={styles.inputIcons}
+				                          />
+				                        }
 				                        
 				                      />
 				                    </Block>

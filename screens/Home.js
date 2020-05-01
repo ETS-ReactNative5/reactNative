@@ -38,7 +38,7 @@ class Home extends React.Component {
           onSwipeOut={() => this.setState({ bottomModalAndTitle: false })}
           modalTitle={
             <ModalTitle
-              title="Bottom Modal"
+              title="Mardi 12/04/2020 12h30"
               hasTitleBar
             />
           }
@@ -51,10 +51,18 @@ class Home extends React.Component {
           >
             <Block row space="evenly"> 
               <Block flex left>
-                <Text>Mardi 12/04/2020 12h30</Text>
+                <Text>Toux</Text>
               </Block>
               <Block  right>
                 <Ionicons name="md-checkmark-circle" size={25} color="green" />
+              </Block>
+            </Block>
+            <Block row space="evenly"> 
+              <Block flex left>
+                <Text>Rhume</Text>
+              </Block>
+              <Block  right>
+                <Ionicons name="md-close" size={25} color="red" />
               </Block>
             </Block>
           </ModalContent>

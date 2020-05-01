@@ -78,23 +78,6 @@ function MessagesStack(props) {
           cardStyle: { backgroundColor: "#F8F9FE" }
         }}
       />
-            <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true
-        }}
-      />
     </Stack.Navigator>
   );
 }
@@ -106,7 +89,7 @@ function EditProfileStack(props) {
         component={EditProfile}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Edit Profile" navigation={navigation} scene={scene} />
+            <Header title="Edit Profile" navigation={navigation} scene={scene} back={true}/>
           ),
           cardStyle: { backgroundColor: "#F8F9FE" }
         }}
@@ -166,23 +149,6 @@ function ProfileStack(props) {
             />
           ),
           cardStyle: { backgroundColor: "#FFFFFF" },
-          headerTransparent: true
-        }}
-      />
-            <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
           headerTransparent: true
         }}
       />

@@ -48,7 +48,7 @@ class Profile extends React.Component {
                     style={{ marginTop: 20, paddingBottom: 24 }}
                   >
                     <Button
-                      middle
+                      small
                       style={{ backgroundColor: argonTheme.COLORS.INFO }}
                     >
                       Take picture
