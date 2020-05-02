@@ -196,7 +196,7 @@ class Login extends React.Component {
                     <Block middle flex={0.44}>
                       <Text bold size={14} 
                         color={argonTheme.COLORS.WHITE}
-                         onPress={() => navigation.navigate("Register")}
+                         onPress={() => console.log('click')}
                          style={styles.text}
                         >
                         CREER UN COMPTE

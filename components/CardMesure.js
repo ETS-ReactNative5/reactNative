@@ -39,9 +39,7 @@ class CardMesure extends React.Component {
             	bold
             	style={{textAlign: "center"}}
            	>
-            	<Text>Détails</Text> {"    "}
-            	<Text>Mettre a jour</Text>{"    "}
-            	<Text>Effacer</Text>
+            	<Text>Taper Pour Voir</Text> {"    "}
             </Text>
           </Block>
         </TouchableWithoutFeedback>

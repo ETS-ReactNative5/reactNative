@@ -2,7 +2,7 @@ import React from 'react';
 import { withNavigation } from '@react-navigation/compat';
 import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
-
+import { Button as GaButton } from "galio-framework";
 
 import Icon from './Icon';
 import Input from './Input';
@@ -58,11 +58,11 @@ class Header extends React.Component {
   renderRight = () => {
     const { white, title, navigation } = this.props;
 
-    if (title === 'Title') {
       return [
         <BellButton key='chat-title' navigation={navigation} isWhite={white} />,
         <BasketButton key='basket-title' navigation={navigation} isWhite={white} />
       ]
+    if (title === 'Title') {
     }
 
     switch (title) {

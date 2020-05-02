@@ -9,9 +9,13 @@ import articles from '../constants/articles';
 const { width } = Dimensions.get('screen'); 
 import { connect } from 'react-redux'
 import Images from "../constants/Images";
-import Modal, { SlideAnimation, ModalContent, ModalTitle } from 'react-native-modals';
+import Modal, { SlideAnimation, ModalContent, ModalTitle ,
+  ModalFooter,
+  ModalButton,
+  ScaleAnimation} from 'react-native-modals';
 import { Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import { ListItem } from 'react-native-elements'
 
 class Home extends React.Component {
 
@@ -19,6 +23,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       bottomModalAndTitle: false,
+      defaultAnimationModal: false,
     }
   }
 
@@ -49,22 +54,35 @@ class Home extends React.Component {
               backgroundColor: 'fff',
             }}
           >
-            <Block row space="evenly"> 
-              <Block flex left>
-                <Text>Toux</Text>
-              </Block>
-              <Block  right>
-                <Ionicons name="md-checkmark-circle" size={25} color="green" />
-              </Block>
-            </Block>
-            <Block row space="evenly"> 
-              <Block flex left>
-                <Text>Rhume</Text>
-              </Block>
-              <Block  right>
-                <Ionicons name="md-close" size={25} color="red" />
-              </Block>
-            </Block>
+
+            <ListItem
+              //key={i}
+              title={"Toux"}
+              // leftIcon={{ name: item.icon }}
+              bottomDivider
+              chevron={<Ionicons name="md-checkmark-circle" size={25} color="green" />}
+            />
+            <ListItem
+              //key={i}
+              title={"Rhume"}
+              // leftIcon={{ name: item.icon }}
+              bottomDivider
+              chevron={ <Ionicons name="md-close" size={25} color="red" />}
+            />
+            <ListItem
+              //key={i}
+              title={"Diarrhée"}
+              // leftIcon={{ name: item.icon }}
+              bottomDivider
+              chevron={ <Ionicons name="md-close" size={25} color="red" />}
+            />
+            <ListItem
+              //key={i}
+              title={"Odorat"}
+              // leftIcon={{ name: item.icon }}
+              bottomDivider
+              chevron={<Ionicons name="md-checkmark-circle" size={25} color="green" />}
+            />
           </ModalContent>
         </Modal.BottomModal>
         <ScrollView
@@ -93,7 +111,50 @@ class Home extends React.Component {
               <Card item={articles[4]} full /> : null
             }
             {this.props.currentItem === "antecedent" ?
-              <Card item={articles[4]} full /> : null
+            <Block flex>
+              <ListItem 
+              //key={i}
+              title={"Hypertension"}
+              leftIcon={<Ionicons name="md-return-right" size={25} color="green" />}
+              bottomDivider
+              chevron
+              onPress={() =>  this.setState({ defaultAnimationModal: true })}
+            />
+            <Modal
+              width={0.9}
+              visible={this.state.defaultAnimationModal}
+              rounded
+              actionsBordered
+              onTouchOutside={() => {
+                this.setState({ defaultAnimationModal: false });
+              }}
+              modalTitle={
+                <ModalTitle
+                  title="Détails Hypertension"
+                  align="center"
+                />
+              }
+              footer={
+                <ModalFooter>
+                  <ModalButton
+                    text="OK"
+                    bordered
+                    onPress={() => {
+                      this.setState({ defaultAnimationModal: false });
+                    }}
+                    key="button-2"
+                  />
+                </ModalFooter>
+              }
+            >
+              <ModalContent
+                style={{ backgroundColor: '#fff' }}
+              >
+                <Text>Cette personne est hypertendue</Text>
+                <Text>Autre information .......................;;</Text>
+              </ModalContent>
+            </Modal>
+            </Block> : null
             }
           </Block>
         </ScrollView> 

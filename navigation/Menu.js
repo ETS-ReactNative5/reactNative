@@ -15,8 +15,8 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
   const screens = [
     {title: "Home", name: "Journal"}, 
     {title: "Profile", name: "Profile"},
-    {title: "Account", name: "Account"},
-    {title: "Elements", name: "Elements"},
+    // {title: "Account", name: "Account"},
+    // {title: "Elements", name: "Elements"},
     {title: "Messages", name: "Messages"},
     {title: "Articles", name: "Données"}
   ];

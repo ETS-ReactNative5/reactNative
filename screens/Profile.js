@@ -49,7 +49,7 @@ class Profile extends React.Component {
                   >
                     <Button
                       small
-                      style={{ backgroundColor: argonTheme.COLORS.INFO }}
+                      style={styles.optionsButton}
                     >
                       Take picture
                     </Button>
@@ -290,6 +290,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     marginTop: 10,
     elevation: 4,
+  },
+  optionsButton: {
+    width: "auto",
+    height: 34,
+    paddingHorizontal: theme.SIZES.BASE,
+    paddingVertical: 10
   },
   profileContainer: {
     width: width,

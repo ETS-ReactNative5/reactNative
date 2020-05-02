@@ -16,6 +16,7 @@ import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Messages from "../screens/Messages";
 import Articles from "../screens/Articles";
+import Donnees from "../screens/Donnees";
 import Login from "../screens/Login";
 import EditProfile from "../screens/EditProfile";
 // drawer
@@ -103,29 +104,18 @@ function ArticlesStack(props) {
     <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen 
         name="Articles"
-        component={Articles}
+        component={Donnees}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Articles" navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" }
-        }}
-      />
-            <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
+            <Header title="Données" 
+              title="Données"
+              search
+              tabs={[{ id: 'messure', title: 'Nouvelle Mésure' }]}
               navigation={navigation}
-              scene={scene}
+              data = {true}
             />
           ),
-          headerTransparent: true
+          cardStyle: { backgroundColor: "#F8F9FE" }
         }}
       />
     </Stack.Navigator>
