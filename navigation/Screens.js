@@ -110,7 +110,7 @@ function ArticlesStack(props) {
             <Header title="Données" 
               title="Données"
               search
-              tabs={[{ id: 'messure', title: 'Nouvelle Mésure' }]}
+              tabs={[{ id: 'messure', title: 'Nouveau paramètre' }]}
               navigation={navigation}
               data = {true}
             />

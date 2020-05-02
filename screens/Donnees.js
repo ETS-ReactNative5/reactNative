@@ -83,7 +83,56 @@ class Donnees extends React.Component {
                     title={"Odorat"}
                     // leftIcon={{ name: item.icon }}
                     bottomDivider
-                    chevron={<Ionicons name="md-checkmark-circle" size={25} color="green" />}
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
+                  />
+                  <ListItem
+                    //key={i}
+                    title={"Tete"}
+                    // leftIcon={{ name: item.icon }}
+                    bottomDivider
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
+                  />
+                  <ListItem
+                    //key={i}
+                    title={"Fievre"}
+                    // leftIcon={{ name: item.icon }}
+                    bottomDivider
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
+                  />
+                  <ListItem
+                    //key={i}
+                    title={"Gorge"}
+                    // leftIcon={{ name: item.icon }}
+                    bottomDivider
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
+                  />
+                  <ListItem
+                    //key={i}
+                    title={"Gene"}
+                    // leftIcon={{ name: item.icon }}
+                    bottomDivider
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
+                  />
+                  <ListItem
+                    //key={i}
+                    title={"Fatigue"}
+                    // leftIcon={{ name: item.icon }}
+                    bottomDivider
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
+                  />
+                  <ListItem
+                    //key={i}
+                    title={"Courbature"}
+                    // leftIcon={{ name: item.icon }}
+                    bottomDivider
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
+                  />
+                  <ListItem
+                    //key={i}
+                    title={"Etranger"}
+                    // leftIcon={{ name: item.icon }}
+                    bottomDivider
+                    chevron={<Ionicons name="md-close" size={25} color="red" />}
                   />
                 </ModalContent>
               </Modal.BottomModal>

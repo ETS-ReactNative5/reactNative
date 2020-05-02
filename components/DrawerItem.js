@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Block, Text, theme } from "galio-framework";
-
+import { Ionicons } from '@expo/vector-icons';
 import Icon from "./Icon";
 import argonTheme from "../constants/Theme";
 
@@ -21,11 +21,11 @@ class DrawerItem extends React.Component {
         );
       case "Messages":
         return (
-          <Icon
-            name="map-big"
+          <Ionicons 
+            name="md-mail-open" 
+            size={14} 
             family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.ERROR}
+            color={focused ? "white" : argonTheme.COLORS.ERROR} 
           />
         );
       case "Données":
