@@ -8,6 +8,9 @@ import { argonTheme } from '../constants';
 
 
 class Centre extends React.Component {
+  constructor (props) {
+    super(props);
+  }
   render() {
     const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
     
@@ -30,9 +33,13 @@ class Centre extends React.Component {
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => {}}>
           <Block flex space="between" style={styles.cardDescription}>
-            <Text size={14} style={styles.cardTitle}>Hopital general</Text>
-            <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>www.hpital.com</Text>
-            <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>695 93 07 73</Text>
+            <Text size={14} style={styles.cardTitle}>{this.props.item1.nom}</Text>
+            <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>
+              {this.props.item1.email}
+            </Text>
+            <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>
+              {this.props.item1.telephone}
+            </Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>

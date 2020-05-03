@@ -16,6 +16,7 @@ import Modal, { SlideAnimation, ModalContent, ModalTitle ,
 import { Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements'
+import { getPersonalData } from "./StatteFullComponents";
 
 class Home extends React.Component {
 
@@ -26,13 +27,18 @@ class Home extends React.Component {
       defaultAnimationModal: false,
     }
   }
+  async componentDidMount() {
+    let data = await getPersonalData('/api_v1/apis/4/profiles.json');
+    console.log('data',data)
+    this.props.setDataState(data);
+  }
 
  showDetail = (id) => {
   this.setState({bottomModalAndTitle: true})
  }
 
   render() {
-    console.log(this.props);
+    console.log('centre',this.props.data);
     return (
       <Block flex center style={styles.home}>
         <Modal.BottomModal
@@ -147,11 +153,20 @@ class Home extends React.Component {
               <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
             </Block>: null
             }
-            {this.props.currentItem === "centre" ?
-            <Block flex row>
-              <Centre item={articles[1]} style={{ marginRight: theme.SIZES.BASE }} />
-              <Centre item={articles[2]} />
-            </Block> : null
+            {
+              this.props.currentItem === "centre" && this.props.data !== null?
+              <Block flex row>
+                {this.props.data.centres.map((center, ind) =>{
+                  return (
+                      <Centre item={articles[0]} item1={center} key={ind} 
+                        style={ ind % 2 == 0 ?
+                          { marginRight: theme.SIZES.BASE } : null
+                        }
+                      />
+                    )
+                })
+                }
+              </Block> : null
             }
             {this.props.currentItem === "geolocalisation" ?
               <Card item={articles[4]} full /> : null
@@ -245,10 +260,12 @@ const mapDispatchToProps = dispatch => {
     },
     showMesureFunction:  async () => {
       dispatch({type: "SHOW_MESURE"});
-    }
+    },
+    setDataState:  async (data) => {
+      dispatch({type: "SET_DATA_STATE", data: data});
+    },
+
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-

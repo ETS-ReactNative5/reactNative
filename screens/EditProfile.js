@@ -30,14 +30,33 @@ class EditProfile extends React.Component {
       "switch-1": true, 
       "switch-2": false,
       messages: [],
+      nom: "",
+      prenom: "",
+      username: "",
+      datenaiss: null,
+      email: "",
+      addresse: "",
+      telephone: ""
     };
   }
 
   componentDidMount() {
-      
+    let data = this.props.data;
+    if(data !== null){
+    	this.setState({
+    		prenom: data.user.personne.prenom,
+    		nom: data.user.personne.nom,
+    		email: data.user.personne.email,
+    		datenaiss: data.user.personne.datenaiss,
+    		telephone: data.user.personne.telephone,
+    		addresse: data.user.personne.adresse,
+    		username: data.user.personne.user.username,
+    	})
+    }
   }
  
   render() {
+  	let data = this.props.data;
     return (
     	<Block flex center style={styles.home}>
     		<ScrollView
@@ -60,6 +79,7 @@ class EditProfile extends React.Component {
 				                      <Input
 				                        borderless
 				                        placeholder="Nom"
+				                        value={this.state.nom}
 				                        onChangeText={(us) => {
 				                          this.setState({nom: us});
 				                          console.log(us);
@@ -73,6 +93,7 @@ class EditProfile extends React.Component {
 				                      <Input
 				                        borderless
 				                        placeholder="Prénom"
+				                        value={this.state.prenom}
 				                        onChangeText={(us) => {
 				                          this.setState({prenom: us});
 				                          console.log(us);
@@ -87,6 +108,7 @@ class EditProfile extends React.Component {
 				                      <Input
 				                        borderless
 				                        placeholder="Email"
+				                        value={this.state.email}
 				                        onChangeText={(us) => {
 				                          this.setState({email: us});
 				                          console.log(us);
@@ -101,8 +123,9 @@ class EditProfile extends React.Component {
 				                      <Input
 				                        borderless
 				                        placeholder="Télephone"
+				                        value={this.state.telephone}
 				                        onChangeText={(us) => {
-				                          this.setState({tel: us});
+				                          this.setState({telephone: us});
 				                          console.log(us);
 				                        }}
 				                        iconContent={
@@ -114,8 +137,9 @@ class EditProfile extends React.Component {
 				                      <Input
 				                        borderless
 				                        placeholder="Date de Naissance"
+				                        value={this.state.datenaiss}
 				                        onChangeText={(us) => {
-				                          this.setState({ddn: us});
+				                          this.setState({datenaiss: us});
 				                          console.log(us);
 				                        }}
 				                        iconContent={
@@ -134,6 +158,7 @@ class EditProfile extends React.Component {
 				                      <Input
 				                        borderless
 				                        placeholder="Addresse"
+				                        value={this.state.addresse}
 				                        onChangeText={(us) => {
 				                          this.setState({addresse: us});
 				                          console.log(us);
@@ -152,6 +177,7 @@ class EditProfile extends React.Component {
 				                      <Input
 				                        borderless
 				                        placeholder="username"
+				                        value={this.state.username}
 				                        onChangeText={(us) => {
 				                          this.setState({username: us});
 				                          console.log(us);
@@ -300,5 +326,7 @@ const styles = StyleSheet.create({
     borderColor: "#E9ECEF"
   },
 });
-
-export default EditProfile;
+const mapStateToProps = (state) => {
+  return state
+}
+export default connect(mapStateToProps)(EditProfile);
