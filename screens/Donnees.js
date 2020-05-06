@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import { connect } from 'react-redux'
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
@@ -24,121 +25,38 @@ class Donnees extends React.Component {
       "switch-1": true, 
       "switch-2": false,
       bottomModalAndTitle: false,
+      currentCliqued: null,
+      currentIndex: null
     };
   }
 
-  
-  showDetail = (id) => {
-  this.setState({bottomModalAndTitle: true})
+
+ preset = (ind) => {
+  this.setState(previousState => ({
+      currentIndex: ind,
+    }))
+  //this.setState({bottomModalAndTitle: true});
+  console.log('this.state.daig', this.state.currentCliqued);
  }
+
   render() {
     return (
       <Block flex  style={styles.home} center>
         <ScrollView showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.articles}>
           <Block flex>
-              <Modal.BottomModal
-                visible={this.state.bottomModalAndTitle}
-                onTouchOutside={() => this.setState({ bottomModalAndTitle: false })}
-                height={0.95}
-                width={1}
-                onSwipeOut={() => this.setState({ bottomModalAndTitle: false })}
-                modalTitle={
-                  <ModalTitle
-                    title="Mardi 12/04/2020 12h30"
-                    hasTitleBar
-                  />
-                }
-              >
-                <ModalContent
-                  style={{
-                    flex: 1, 
-                    backgroundColor: 'fff',
-                  }}
-                >
-
-                  <ListItem
-                    //key={i}
-                    title={"Toux"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-checkmark-circle" size={25} color="green" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Rhume"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={ <Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Diarrhée"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={ <Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Odorat"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Tete"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Fievre"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Gorge"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Gene"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Fatigue"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Courbature"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Etranger"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                </ModalContent>
-              </Modal.BottomModal>
-              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
-              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
-              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
+              {
+                this.props.data.user.diagnostiques.map((diag, ind) => {
+                return(
+                  <CardMesure 
+                    showDetail={() => this.preset(ind)} 
+                    item={diag} horizontal key={ind} 
+                    indexState={this.state.currentIndex}
+                    index={ind}
+                  />  : null 
+                  )
+                })
+            }
             </Block>
         </ScrollView>
       </Block>
@@ -212,4 +130,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Donnees;
+const mapStateToProps = (state) => {
+  return state
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Donnees);

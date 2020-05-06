@@ -19,6 +19,7 @@ import Articles from "../screens/Articles";
 import Donnees from "../screens/Donnees";
 import Login from "../screens/Login";
 import EditProfile from "../screens/EditProfile";
+import Param from "../screens/Param";
 // drawer
 import CustomDrawerContent from "./Menu";
 
@@ -98,6 +99,22 @@ function EditProfileStack(props) {
     </Stack.Navigator>
   );
 }
+function ParamStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="Param"
+        component={Param}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Nouveau Paramètre" navigation={navigation} scene={scene} back={true}/>
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" }
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function ArticlesStack(props) {
   return (
@@ -110,7 +127,7 @@ function ArticlesStack(props) {
             <Header title="Données" 
               title="Données"
               search
-              tabs={[{ id: 'messure', title: 'Nouveau paramètre' }]}
+              tabs={[{ id: 'messure', title: 'Nouveau paramètre', type: true }]}
               navigation={navigation}
               data = {true}
             />
@@ -268,6 +285,7 @@ function AppStack(props) {
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Messages" component={MessagesStack} />
       <Drawer.Screen name="EditProfile" component={EditProfileStack} />
+      <Drawer.Screen name="Param" component={ParamStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
     </Drawer.Navigator>
   );

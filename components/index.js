@@ -8,6 +8,7 @@ import Switch from './Switch';
 import Select from './Select';
 import CardMesure from './CardMesure';
 import Centre from './Centre';
+import CasContact from './CasContact';
 
 export {
   Button,
@@ -19,5 +20,6 @@ export {
   Switch, 
   Select,
   CardMesure,
-  Centre
+  Centre,
+  CasContact
 };

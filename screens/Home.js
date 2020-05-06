@@ -4,6 +4,7 @@ import { Block, theme, Text } from 'galio-framework';
 
 import { Card } from '../components';
 import { CardMesure } from '../components';
+import { CasContact } from '../components';
 import { Centre } from '../components';
 import articles from '../constants/articles';
 const { width } = Dimensions.get('screen'); 
@@ -25,6 +26,8 @@ class Home extends React.Component {
     this.state = {
       bottomModalAndTitle: false,
       defaultAnimationModal: false,
+      currentCliqued: null,
+      currentIndex: null,
     }
   }
   async componentDidMount() {
@@ -33,8 +36,12 @@ class Home extends React.Component {
     this.props.setDataState(data);
   }
 
- showDetail = (id) => {
-  this.setState({bottomModalAndTitle: true})
+ preset = (ind) => {
+  this.setState(previousState => ({
+      currentIndex: ind,
+    }))
+  //this.setState({bottomModalAndTitle: true});
+  console.log('this.state.daig', this.state.currentCliqued);
  }
 
   render() {
@@ -62,95 +69,55 @@ class Home extends React.Component {
           >
 
             <ListItem
-                    //key={i}
-                    title={"Toux"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-checkmark-circle" size={25} color="green" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Rhume"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={ <Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Diarrhée"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={ <Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Odorat"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Tete"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Fievre"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Gorge"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Gene"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Fatigue"} 
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}<Ionicons name="md-close" size={25} color="red" />
-                    title={"Courbature"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
-                  <ListItem
-                    //key={i}
-                    title={"Etranger"}
-                    // leftIcon={{ name: item.icon }}
-                    bottomDivider
-                    chevron={<Ionicons name="md-close" size={25} color="red" />}
-                  />
+              //key={i}
+              title={"Toux"}
+              // leftIcon={{ name: item.icon }}
+              bottomDivider
+              chevron={<Ionicons name="md-checkmark-circle" size={25} color="green" />}
+            />
+            <ListItem
+              //key={i}
+              title={"Rhume"}
+              // leftIcon={{ name: item.icon }}
+              bottomDivider
+              chevron={ <Ionicons name="md-close" size={25} color="red" />}
+            />
           </ModalContent>
         </Modal.BottomModal>
         <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.articles}>
           <Block flex>
-            {this.props.currentItem === "activite" ?
+            {this.props.currentItem === "activite" && this.props.data  !== null ?
             <Block flex>
               {/*<Text size={24} style={{textAlign: "center"}}>Activitées</Text>*/}
-              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
-              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
-              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
-              <CardMesure showDetail={this.showDetail} item={articles[0]} horizontal  /> 
+              {this.props.data.user.diagnostiques.slice(0, 7).map((diag, ind) => {
+                return(
+                  <CardMesure 
+                    showDetail={() => this.preset(ind)} 
+                    item={diag} horizontal key={ind} 
+                    indexState={this.state.currentIndex}
+                    index={ind}
+                  />  : null 
+                  )
+                })
+              }
+            </Block>: null
+            }
+            {this.props.currentItem === "cascontact" && this.props.data  !== null ?
+            <Block flex>
+              {/*<Text size={24} style={{textAlign: "center"}}>Activitées</Text>*/}
+              {this.props.data.user.personnes.map((diag, ind) => {
+                return(
+                  <CasContact 
+                    //showDetail={() => this.preset(ind)} 
+                    cascontact={diag} horizontal key={ind} 
+                    //indexState={this.state.currentIndex}
+                    //index={ind}
+                  />  : null 
+                  )
+                })
+              }
             </Block>: null
             }
             {

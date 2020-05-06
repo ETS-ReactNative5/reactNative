@@ -152,13 +152,19 @@ class Header extends React.Component {
     
     if (!tabs) return null;
 
-    return (
-      <Tabs
+    return ( 
+      <Tabs 
         data={tabs || []}
         initialIndex={tabIndex || defaultTab}
+        onPress={()=> console.log('pressssssss')}
         onChange={id => { 
-          navigation.setParams({ tabId: id }); 
-          this.props.showElementFunction(id);
+          navigation.setParams({ tabId: id });
+          if(id !== "messure") {
+            this.props.showElementFunction(id);
+          }
+          else{
+            navigation.navigate("Param");
+          }
           console.log('<------------------->',id);
         }} />
     )
