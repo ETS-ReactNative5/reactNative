@@ -15,6 +15,7 @@ import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Messages from "../screens/Messages";
+import AddCasContact from "../screens/AddCasContact";
 import Articles from "../screens/Articles";
 import Donnees from "../screens/Donnees";
 import Login from "../screens/Login";
@@ -76,6 +77,22 @@ function MessagesStack(props) {
         options={{
           header: ({ navigation, scene }) => (
             <Header title="Messages" navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" }
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function AddCasContactStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="AddCasContact"
+        component={AddCasContact}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Nouveau Contact" navigation={navigation} scene={scene} back={true}/>
           ),
           cardStyle: { backgroundColor: "#F8F9FE" }
         }}
@@ -285,6 +302,7 @@ function AppStack(props) {
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Messages" component={MessagesStack} />
       <Drawer.Screen name="EditProfile" component={EditProfileStack} />
+      <Drawer.Screen name="AddCasContact" component={AddCasContactStack} />
       <Drawer.Screen name="Param" component={ParamStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
     </Drawer.Navigator>

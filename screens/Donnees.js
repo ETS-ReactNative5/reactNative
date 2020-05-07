@@ -40,7 +40,7 @@ class Donnees extends React.Component {
  }
 
   render() {
-    return (
+    return ( 
       <Block flex  style={styles.home} center>
         <ScrollView showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.articles}>

@@ -10,6 +10,7 @@ const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
 // const mamedLogo = require("../assets/imgs/logo_mamed.jpg");
 const mamedLogo = require("../assets/imgs/log.jpg");
+const Host = require("../assets/imgs/hos.png");
 // internet imgs
 
 const ProfilePicture = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?fit=crop&w=1650&q=80';
@@ -40,5 +41,6 @@ export default {
   ArgonLogo,
   iOSLogo,
   androidLogo,
-  mamedLogo
+  mamedLogo,
+  Host
 };

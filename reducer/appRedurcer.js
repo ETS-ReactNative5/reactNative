@@ -6,6 +6,7 @@ initialState = {
 	showMesure: true,
 	currentItem: "activite",
 	data: null,
+	casContact: null,
 }
 
 function app(state = initialState, action) {
@@ -27,6 +28,9 @@ function app(state = initialState, action) {
 	      	return curentState;
 	    case 'SET_DATA_STATE':
 	  		curentState = {...curentState, data: action.data}
+	      	return curentState;
+	    case 'SET_DATA_STATE':
+	  		curentState = {...curentState, casContact: action.data}
 	      	return curentState;
 	  	default:
     		return curentState;

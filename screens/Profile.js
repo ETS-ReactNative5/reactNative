@@ -44,7 +44,8 @@ class Profile extends React.Component {
               <Block flex style={styles.profileCard}>
                 <Block middle style={styles.avatarContainer}>
                   <Image
-                    source={{ uri: baseUri+"/bundles/mamedcovid/assets/images/pictures/2.jpeg" }}
+                    source={{ uri: baseUri+"/bundles/mamedcovid/assets/images/pictures/"+
+                    data.user.personne.image }}
                     style={styles.avatar}
                   />
                 </Block>
@@ -135,7 +136,11 @@ class Profile extends React.Component {
                       >
                         Contact Urgence
                       </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>695 93 07 73</Text>
+                      <Text size={12} color={argonTheme.COLORS.TEXT}>
+                        {data.user.telephone_contact_urgence !== null ?
+                          data.user.telephone_contact_urgence : "(Non défini)"
+                        }
+                      </Text>
                     </Block>
                     <Block middle>
                       <Text
@@ -146,7 +151,11 @@ class Profile extends React.Component {
                       >
                         Persone
                       </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>Nom person</Text>
+                      <Text size={12} color={argonTheme.COLORS.TEXT}>
+                        {data.user.nom_contact_urgence !== null ?
+                          data.user.nom_contact_urgence : "(Non défini)"
+                        }
+                      </Text>
                     </Block>
                   </Block>
 
