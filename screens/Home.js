@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, Image, Linking, TouchableOpacity} from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 import { FloatingAction } from "react-native-floating-action";
 import LoadingView from 'react-native-loading-view'
@@ -7,6 +7,7 @@ import { Card } from '../components';
 import { CardMesure } from '../components';
 import { CasContact } from '../components';
 import { Centre } from '../components';
+import { Rapport } from '../components';
 import articles from '../constants/articles';
 const { width } = Dimensions.get('screen'); 
 import { connect } from 'react-redux'
@@ -20,6 +21,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements'
 import { getPersonalData } from "./StatteFullComponents";
 import {  argonTheme } from "../constants";
+import { baseUri } from "./StatteFullComponents";
 
 class Home extends React.Component {
 
@@ -29,12 +31,13 @@ class Home extends React.Component {
       bottomModalAndTitle: false, 
       defaultAnimationModal: false,
       currentCliqued: null,
-      currentIndex: null,
+      currentIndex: null, 
       isLoanding: true,
     }
   }
   async componentDidMount() {
-    let data = await getPersonalData('/api_v1/apis/4/profiles.json');
+    console.log('idididi',this.props.id)
+    let data = await getPersonalData('/api_v1/apis/'+this.props.id+'/profiles.json');
     console.log('data',data)
     this.props.setDataState(data);
     this.setState({isLoanding: false})
@@ -49,7 +52,7 @@ class Home extends React.Component {
  }
 
   render() {
-    console.log('centre',this.props.data);
+    console.log('centre',this.props);
     const { navigation } = this.props;
     return (
       <LoadingView loading={this.state.isLoanding}>
@@ -122,7 +125,8 @@ class Home extends React.Component {
                         key={ind}
                         onPress={()=>{
                           this.props.toSetCasContact(diag);
-                          navigation.navigate("AddCasContact", {obj: "diag"});
+                          console.log(diag);
+                          navigation.navigate("AddCasContact");
                         }}
                         title={diag.personne.nom}
                         // leftIcon={{ name: item.icon }}
@@ -133,6 +137,40 @@ class Home extends React.Component {
                   })
                 }
               </Block>: null
+              }
+              {
+                this.props.currentItem === "result" && this.props.data !== null?
+                <Block flex row>
+                  {this.props.data.user.fichiers.map((center, ind) =>{
+                    return (
+                      <TouchableOpacity  key={ind} 
+                        onPress={async()=>{
+                            console.log("dd{jdjdjdjdjdj");
+                            let base = "https://covid.mamed.care/web/uploads/images/rapports/";
+                            const supported = await Linking.canOpenURL(base+center.fichier);
+                            await Linking.openURL(base+center.fichier);
+                          }
+                        }>
+                          <Image
+                            key={ind}
+                            item={articles[0]}
+                            item1={center}
+                            source={
+                              ["png", "jpg", "jpeg", "jpeg"].includes(center.fichier.split('.')[1]) ? 
+                              { uri: "https://covid.mamed.care/web/uploads/images/rapports/"+center.fichier}
+                              : ["pdf"].includes(center.fichier.split('.')[1]) ?
+                              { uri: "https://covid.mamed.care/web/uploads/images/rapports/default-pdf.jpeg"}
+                              : ["odt"].includes(center.fichier.split('.')[1]) ?
+                              { uri: "https://covid.mamed.care/web/uploads/images/rapports/default-word.png"}
+                              : null
+                            }
+                            style={styles.avatar} 
+                          />
+                      </TouchableOpacity>
+                      )
+                  })
+                  }
+                </Block> : null
               }
               {
                 this.props.currentItem === "centre" && this.props.data !== null?
@@ -217,6 +255,7 @@ class Home extends React.Component {
                     ]}
                   onPressItem={name => {
                     this.props.toSetCasContact(null)
+                    console.log('bccncncbccccncbcbcnccn')
                     navigation.navigate("AddCasContact", {obj: null});
                   }}
                   // color={argonTheme.COLORS.WHITE}
@@ -241,6 +280,12 @@ const styles = StyleSheet.create({
   home: {
     width: width,    
   },
+  avatar: {
+    width: 75,
+    height: 50,
+    borderRadius: 22,
+    borderWidth: 0,
+  },
   articles: {
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE,
@@ -249,7 +294,7 @@ const styles = StyleSheet.create({
   //   marginBottom: '0px',
   // }
 });
-
+ 
 const mapStateToProps = (state) => {
   return state
 }

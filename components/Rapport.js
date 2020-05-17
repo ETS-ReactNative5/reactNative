@@ -8,7 +8,7 @@ import Images from "../constants/Images";
 import { argonTheme } from '../constants';
 
 
-class Centre extends React.Component {
+class Rapport extends React.Component {
   constructor (props) {
     super(props);
   }
@@ -55,7 +55,7 @@ class Centre extends React.Component {
   }
 }
 
-Centre.propTypes = {
+Rapport.propTypes = {
   item: PropTypes.object,
   horizontal: PropTypes.bool,
   full: PropTypes.bool,
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(Centre);
+export default withNavigation(Rapport);

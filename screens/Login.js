@@ -2,22 +2,27 @@ import React from "react";
 import {
   StyleSheet,
   ImageBackground,
-  Dimensions,
+  Dimensions, 
   StatusBar,
   KeyboardAvoidingView,
-  Modal,
   ActivityIndicator,
   Image
 } from "react-native";
+import { connect } from 'react-redux'
 import { Block, Checkbox, Text, theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
+import { login } from "./StatteFullComponents";
 
 
 const { width, height } = Dimensions.get("screen");
 import AnimatedLoader from "react-native-animated-loader";
 import { Loader } from "./Load";
+import Modal, { SlideAnimation, ModalContent, ModalTitle ,
+  ModalFooter,
+  ModalButton,
+  ScaleAnimation} from 'react-native-modals';
 
 class Login extends React.Component {
   constructor(props){
@@ -26,22 +31,79 @@ class Login extends React.Component {
       visible: false,
       password: '',
       username: '',
+      error: false,
+      eror_m:  "",
+      defaultAnimationModal: false,
     }
   }
-
-  onLogin = () => {
+ 
+  onLogin = async () => {
     const { navigation } = this.props;
-    //this.setState({visible: true});
-    if(this.state.username === 'user'){
-      this.setState({visible: false});
+    this.setState({visible: true})
+     //setTimeout(() => this.setState({visible: false}), 3000);
+
+    //!this.state.visible ? navigation.navigate("App") : null
+      
+
+    let ob = {
+      username: this.state.username,
+      password: this.state.password
     }
+    let data = await login(ob); 
+    if(data.data.success && data.data.success == true){
+      this.setState({visible: false, error: false})
+      console.log('in login',data);
+      this.props.setId(data.data.id);
+      console.log('ths.state.id', this.state.id);
       navigation.navigate("App")
+    }
+    else{
+      this.setState({
+        eror_m: "Une erreur inconnue est survenue",
+        visible: false,
+        error: true,
+        defaultAnimationModal: true
+      })
+    }
     return;
   }
   render() {
     const { navigation } = this.props;
     return (
       <Block flex middle>
+        <Modal
+                width={0.9}
+                visible={this.state.defaultAnimationModal}
+                rounded
+                actionsBordered
+                onTouchOutside={() => {
+                  this.setState({ defaultAnimationModal: false });
+                }}
+                modalTitle={
+                  <ModalTitle
+                    title="Erreur de connexion"
+                    align="center"
+                  />
+                }
+                footer={
+                  <ModalFooter>
+                    <ModalButton
+                      text="OK"
+                      bordered
+                      onPress={() => {
+                        this.setState({ defaultAnimationModal: false });
+                      }}
+                      key="button-2"
+                    />
+                  </ModalFooter>
+                }
+              >
+                <ModalContent
+                  style={{ backgroundColor: '#fff' }}
+                >
+                  <Text>{this.state.eror_m}</Text>
+                </ModalContent>
+              </Modal>
         <StatusBar hidden /> 
         <ImageBackground
           source={Images.RegisterBackground}
@@ -51,34 +113,6 @@ class Login extends React.Component {
             <Block style={styles.registerContainer}>
               <Block flex={0.25} middle style={styles.socialConnect}>
                 <Image styles={styles.logo} source={Images.mamedLogo} />
-                {/*
-                  <Block row style={{ marginTop: theme.SIZES.BASE }}>
-                    <Button style={{ ...styles.socialButtons, marginRight: 30 }}>
-                      <Block row>
-                        <Icon
-                          name="logo-github"
-                          family="Ionicon"
-                          size={14}
-                          color={"black"}
-                          style={{ marginTop: 2, marginRight: 5 }}
-                        />
-                        <Text style={styles.socialTextButtons}>GITHUB</Text>
-                      </Block>
-                    </Button>
-                    <Button style={styles.socialButtons}>
-                      <Block row>
-                        <Icon
-                          name="logo-google"
-                          family="Ionicon"
-                          size={14}
-                          color={"black"}
-                          style={{ marginTop: 2, marginRight: 5 }}
-                        />
-                        <Text style={styles.socialTextButtons}>GOOGLE</Text>
-                      </Block>
-                    </Button>
-                  </Block>
-                */}
               </Block>
               <Block flex>
                 <Block flex={0.17} middle>
@@ -92,23 +126,6 @@ class Login extends React.Component {
                     behavior="padding"
                     enabled
                   >
-                    {/* 
-                    <Block width={width * 0.8} style={{ marginBottom: 15 }}>
-                      <Input
-                        borderless
-                        placeholder="Name"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="hat-3"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
-                        }
-                      />
-                    </Block>
-                    */}
                     <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                       <Input
                         borderless
@@ -159,27 +176,6 @@ class Login extends React.Component {
                       </Block>
                     }
                     </Block>
-                  {/*
-                    <Block row width={width * 0.75}>
-                      <Checkbox
-                        checkboxStyle={{
-                          borderWidth: 3
-                        }}
-                        color={argonTheme.COLORS.PRIMARY}
-                        label="I agree with the"
-                      />
-                      <Button
-                        style={{ width: 100 }}
-                        color="transparent"
-                        textStyle={{
-                          color: argonTheme.COLORS.PRIMARY,
-                          fontSize: 14
-                        }}
-                      >
-                        Privacy Policy
-                      </Button>
-                    </Block>
-                  */}
                     <Block middle>
                       <Button color="primary" 
                         style={styles.createButton}
@@ -276,4 +272,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+const mapStateToProps = (state) => {
+  return state
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setId: async (id) => {
+      dispatch({type: "SET_ID", id: id});
+    },
+
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

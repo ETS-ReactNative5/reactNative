@@ -44,24 +44,32 @@ class AddCasContact extends React.Component {
   }
 
   componentDidMount() {
-  	console.log('this.props.cascontat', this.route)
-  	if(this.route !== null){
-    	// let data = this.props.obj;
-    	// this.setState({
-    	// 	prenom: data.personne.prenom,
-    	// 	nom: data.personne.nom,
-    	// 	email: data.personne.email,
-    	// 	datenaiss: data.daterencontre,
-    	// 	telephone: data.personne.telephone,
-    	// 	lieu: data.lieurencontre,
-    	// })
+  	console.log('this.props', this.props.casContact)
+  	let toProps = this.props.casContact;
+  	if(toProps !== null){
+    	this.setState({
+    		prenom: toProps.personne.prenom,
+    		nom: toProps.personne.nom,
+    		email: toProps.personne.email,
+    		datenaiss: toProps.daterencontre,
+    		telephone: toProps.personne.telephone,
+    		lieu: toProps.lieurencontre,
+    	})
+    }
+    else {
+    	this.setState({
+    		prenom: "",
+    		nom: "",
+    		email: "",
+    		datenaiss: "",
+    		telephone: "",
+    		lieu: "",
+    	})
     }
   }
  
   render() {
-  	let data = this.props.route;
-  	console.log('this.route', data)
-  	console.log('this.props.navigation', this.props.navigation)
+  	console.log('this.props.cascontat', this.props.casContact)
     return (
     	<Block flex center style={styles.home}>
     		<ScrollView
@@ -303,7 +311,15 @@ const styles = StyleSheet.create({
     borderColor: "#E9ECEF"
   },
 });
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { 
   return state
 }
-export default connect(mapStateToProps)(AddCasContact);
+const mapDispatchToProps = dispatch => {
+  return {
+    showLocalisationFunction: async () => {
+      dispatch({type: "SHOW_LOCALISATION"});
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCasContact);

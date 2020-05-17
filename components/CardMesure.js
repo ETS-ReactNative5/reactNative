@@ -39,6 +39,9 @@ class CardMesure extends React.Component {
               {this.props.item !== null ?
             	 this.props.item.datesave: null
               }
+              {this.props.item.datesave ?
+                 null : Date()
+              }
             </Text>
             <Text size={13} style={{ textAlign: "center"}}>
             	Temperature {"    "}:{"    "} {this.props.item.fievre} {"°C"}

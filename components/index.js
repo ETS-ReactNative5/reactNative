@@ -9,6 +9,7 @@ import Select from './Select';
 import CardMesure from './CardMesure';
 import Centre from './Centre';
 import CasContact from './CasContact';
+import Rapport from './Rapport';
 
 export {
   Button,
@@ -21,5 +22,6 @@ export {
   Select,
   CardMesure,
   Centre,
-  CasContact
+  CasContact,
+  Rapport
 };

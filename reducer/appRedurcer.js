@@ -7,6 +7,7 @@ initialState = {
 	currentItem: "activite",
 	data: null,
 	casContact: null,
+	id: 0
 }
 
 function app(state = initialState, action) {
@@ -29,8 +30,24 @@ function app(state = initialState, action) {
 	    case 'SET_DATA_STATE':
 	  		curentState = {...curentState, data: action.data}
 	      	return curentState;
-	    case 'SET_DATA_STATE':
+	    case 'SET_CAS_CONTACT':
 	  		curentState = {...curentState, casContact: action.data}
+	      	return curentState;
+	    case 'SET_ID':
+	  		curentState = {...curentState, id: action.id}
+	      	return curentState;
+	    case 'ADD_DATA':
+	    	let slice = state.data.user.diagnostiques;
+	    	console.log('after op', slice.length)
+	    	slice.push(action.data)
+	    	console.log('before op', slice.length)
+	  		curentState = {...curentState, 
+	  			data: {...curentState.data, 
+	  			user: {...curentState.data.user,
+	  			diagnostiques: slice
+	  			}
+	  		  }
+	  		}
 	      	return curentState;
 	  	default:
     		return curentState;

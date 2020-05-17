@@ -38,9 +38,10 @@ class Donnees extends React.Component {
   //this.setState({bottomModalAndTitle: true});
   console.log('this.state.daig', this.state.currentCliqued);
  }
-
+ 
   render() {
-    return ( 
+    console.log('render ecore')
+    return (
       <Block flex  style={styles.home} center>
         <ScrollView showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.articles}>

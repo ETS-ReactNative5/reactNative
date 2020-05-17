@@ -12,10 +12,13 @@ import Modal, { SlideAnimation, ModalContent, ModalTitle ,
   ModalFooter,
   ModalButton,
   ScaleAnimation} from 'react-native-modals';
-// import { Button } from 'react-native'
+// import { Button } from 'react-native' 
 import { Ionicons } from '@expo/vector-icons';
 import { Switch } from "../components/";
 import { CheckBox } from "react-native";
+import Spinner from 'react-native-loading-spinner-overlay';
+import { onSaveActivity } from "./StatteFullComponents";
+import AlertPro from "react-native-alert-pro";
 
 class Param extends React.Component {
 
@@ -28,7 +31,7 @@ class Param extends React.Component {
       podorat: false,
       diarrhee: false,
       mautete: false,
-      fievre: false,
+      fievre: null,
       generespiratiore: false,
       maugorge: false,
       fatigue: false,
@@ -36,27 +39,38 @@ class Param extends React.Component {
       etatetrange: false,
       voyage: false,
       contact: false,
-      temperature: ""
+      spinner: false,
     }
   }
-  onSave = () => {
+  onSave = async () => {
+    const { navigation } = this.props;
+    this.setState({spinner: true})
     let ob  = {
-      toux: this.state.toux ,
-      rhume: this.state.rhume ,
-      podorat: this.state.podorat ,
-      diarrhee: this.state.diarrhee ,
-      mautete: this.state.mautete ,
-      fievre: this.state.fievre ,
-      generespiratiore: this.state.generespiratiore ,
-      maugorge: this.state.maugorge ,
-      fatigue: this.state.fatigue ,
-      coubaturemusc: this.state.coubaturemusc ,
-      etatetrange: this.state.etatetrange ,
-      voyage: this.state.voyage ,
-      contact: this.state.contact ,
-      temperature: this.state.temperature,
+        diagnostique: {
+          toux: this.state.toux ,
+          rhume: this.state.rhume ,
+          podorat: this.state.podorat ,
+          diarrhee: this.state.diarrhee ,
+          mautete: this.state.mautete ,
+          fievre: this.state.fievre ,
+          generespiratiore: this.state.generespiratiore ,
+          maugorge: this.state.maugorge ,
+          fatigue: this.state.fatigue ,
+          coubaturemusc: this.state.coubaturemusc ,
+          etatetrange: this.state.etatetrange , 
+          voyage: this.state.voyage ,
+          contact: this.state.contact
+        }
     }
-
+    console.log('this.props.data.user.personne.id', this.props.data.user.personne)
+    let rs = await onSaveActivity(this.props.data.user.personne.id, ob, this.props.id);
+    //let data = await getPersonalData('/api_v1/apis/'+this.props.id+'/profiles.json');
+    console.log('rsrsrsrsrsrsrsrs rs',rs)
+    if(rs.data.data.success){
+    } 
+    this.props.addNewInDiag(ob);
+    this.setState({spinner: false})
+    navigation.goBack()
     console.log(ob)
   }
   componentDidMount(){
@@ -82,6 +96,11 @@ class Param extends React.Component {
     console.log('centre',this.props.data);
     return ( 
       <Block flex center style={styles.home}>
+         <Spinner
+          visible={this.state.spinner}
+          textContent={'En cours...'}
+          textStyle={styles.spinnerTextStyle}
+        />
         <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.articles}>
@@ -113,9 +132,9 @@ class Param extends React.Component {
                     <Input
                       borderless
                       placeholder="Votre température"
-                      value={this.state.temperature}
+                      value={this.state.fievre}
                       onChangeText={(us) => {
-                        this.setState({temperature: us});
+                        this.setState({fievre: us});
                         console.log(us);
                       }}
                       iconContent={
@@ -127,16 +146,45 @@ class Param extends React.Component {
                   <Block middle>
                     <Button color="primary" 
                       style={styles.createButton}
-                      onPress={this.onSave}
+                      onPress={() => this.AlertPro.open()}
                     >
                       <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                        ENregistrer
+                        Enregistrer
                       </Text>
                     </Button>
                   </Block>
                 </Block>
             </Block>
         </ScrollView> 
+        <AlertPro
+          ref={ref => {
+            this.AlertPro = ref;
+          }}
+          onConfirm={() => {this.AlertPro.close(); this.onSave()}}
+          onCancel={() => this.AlertPro.close()}
+          title="Confirmation de sauvegarde"
+          message="Voulez vous vraiment sauvegarder?"
+          textCancel="Annuler"
+          textConfirm="Sauver"
+          customStyles={{
+            mask: {
+              backgroundColor: "transparent"
+            },
+            container: {
+              borderWidth: 1,
+              borderColor: "#9900cc",
+              shadowColor: "#000000",
+              shadowOpacity: 0.1,
+              shadowRadius: 10
+            },
+            buttonCancel: {
+              backgroundColor: "#4da6ff"
+            },
+            buttonConfirm: {
+              backgroundColor: "#ffa31a"
+            }
+          }}
+        />
       </Block>
     );
   }
@@ -144,6 +192,9 @@ class Param extends React.Component {
 
 
 const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
   home: {
     width: width,    
   },
@@ -163,16 +214,19 @@ const styles = StyleSheet.create({
   createButton: {
     width: width * 0.5,
     marginTop: 25
-  },
+  }, 
 });
-
+ 
 const mapStateToProps = (state) => {
   return state
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    
+    addNewInDiag: async (data) => {
+      dispatch({type: "ADD_DATA", data: data});
+    },
+
   };
 }
 

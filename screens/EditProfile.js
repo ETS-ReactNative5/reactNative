@@ -13,6 +13,7 @@ import { Centre } from '../components';
 import articles from '../constants/articles';
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
+import { CheckBox } from "react-native";
 
 import {
   ImageBackground, 
@@ -36,7 +37,13 @@ class EditProfile extends React.Component {
       datenaiss: null,
       email: "",
       addresse: "",
-      telephone: ""
+      telephone: "",
+      diabete: false,
+      obesite: false,
+      pcardiaque: false,
+      insuffisance: false,
+      hypertension: false,
+      enceinte: false,
     };
   }
 
@@ -173,6 +180,96 @@ class EditProfile extends React.Component {
 				                    <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
 	                    				<Block style={styles.divider} />
 	                  				</Block>
+	                  				<Block
+				                      row
+				                      // key={key}
+				                      middle
+				                      space="between"
+				                      style={{ marginBottom: theme.SIZES.BASE }}
+				                    >
+				                    <Text style={styles.label}>{" "}Diabète</Text>
+				                      <CheckBox
+				                      value={this.state.diabete}
+				                      onValueChange={(e) => {this.setState({diabete: e})}}
+				                    />
+				                      
+				                    </Block>
+				                    <Block
+				                      row
+				                      // key={key}
+				                      middle
+				                      space="between"
+				                      style={{ marginBottom: theme.SIZES.BASE }}
+				                    >
+				                    <Text style={styles.label}>{" "}Obésité</Text>
+				                      <CheckBox
+				                      value={this.state.obesite}
+				                      onValueChange={(e) => {this.setState({obesite: e})}}
+				                    />
+				                      
+				                    </Block>
+				                    <Block
+				                      row
+				                      // key={key}
+				                      middle
+				                      space="between"
+				                      style={{ marginBottom: theme.SIZES.BASE }}
+				                    >
+				                    <Text style={styles.label}>{" "}Problèmes Cardiques</Text>
+				                      <CheckBox
+				                      value={this.state.pcardiaque}
+				                      onValueChange={(e) => {this.setState({pcardiaque: e})}}
+				                    />
+				                      
+				                    </Block>
+				                    <Block
+				                      row
+				                      // key={key}
+				                      middle
+				                      space="between"
+				                      style={{ marginBottom: theme.SIZES.BASE }}
+				                    >
+				                    <Text style={styles.label}>{" "}Hypertension</Text>
+				                      <CheckBox
+				                      value={this.state.hypertension}
+				                      onValueChange={(e) => {this.setState({hypertension: e})}}
+				                    />
+				                      
+				                    </Block>
+				                    <Block
+				                      row
+				                      // key={key}
+				                      middle
+				                      space="between"
+				                      style={{ marginBottom: theme.SIZES.BASE }}
+				                    >
+				                    <Text style={styles.label}>{" "}Insuffisance Rénale</Text>
+				                      <CheckBox
+				                      value={this.state.insuffisance}
+				                      onValueChange={(e) => {this.setState({insuffisance: e})}}
+				                    />
+				                      
+				                    </Block>
+				                    <Block
+				                      row
+				                      // key={key}
+				                      middle
+				                      space="between"
+				                      style={{ marginBottom: theme.SIZES.BASE }}
+				                    >
+				                    <Text style={styles.label}>{" "}Femmes Enceintes</Text>
+				                      <CheckBox
+				                      value={this.state.enceinte}
+				                      onValueChange={(e) => {
+				                      	this.setState({enceinte: e});
+				                      	console.log('eeeee', e)
+				                      }}
+				                    />
+				                      
+				                    </Block>
+	                  				<Block middle style={{ marginTop: 30, marginBottom: 16 }}>
+	                    				<Block style={styles.divider} />
+	                  				</Block>
 					                <Block width={width * 0.8}>
 				                      <Input
 				                        borderless
@@ -264,7 +361,7 @@ const styles = StyleSheet.create({
 
   registerContainer: {
     width: width * 0.9,
-    height: height * 1,
+    height: height * 1.4,
     // backgroundColor: "#F4F5F7",
     borderRadius: 4,
     // shadowColor: argonTheme.COLORS.BLACK,
