@@ -49,22 +49,22 @@ class Login extends React.Component {
       username: this.state.username,
       password: this.state.password
     }
-    let data = await login(ob); 
-    if(data.data.success && data.data.success == true){
+    //let data = await login(ob); 
       this.setState({visible: false, error: false})
-      console.log('in login',data);
-      this.props.setId(data.data.id);
+      this.props.setId(2);
       console.log('ths.state.id', this.state.id);
       navigation.navigate("App")
-    }
-    else{
-      this.setState({
-        eror_m: "Une erreur inconnue est survenue",
-        visible: false,
-        error: true,
-        defaultAnimationModal: true
-      })
-    }
+    // if(data.data.success && data.data.success == true){
+    //   console.log('in login',data);
+    // }
+    // else{
+    //   this.setState({
+    //     eror_m: "Une erreur inconnue est survenue",
+    //     visible: false,
+    //     error: true,
+    //     defaultAnimationModal: true
+    //   })
+    // }
     return;
   }
   render() {

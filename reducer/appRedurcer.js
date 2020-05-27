@@ -7,7 +7,9 @@ initialState = {
 	currentItem: "activite",
 	data: null,
 	casContact: null,
-	id: 0
+	id: 0,
+	idMed: null,
+	mess: []
 }
 
 function app(state = initialState, action) {
@@ -35,6 +37,9 @@ function app(state = initialState, action) {
 	      	return curentState;
 	    case 'SET_ID':
 	  		curentState = {...curentState, id: action.id}
+	      	return curentState;
+	    case 'TO_SET_ID_MEDECIN':
+	  		curentState = {...curentState, idMed: action.data, mess: action.mess}
 	      	return curentState;
 	    case 'ADD_DATA':
 	    	let slice = state.data.user.diagnostiques;

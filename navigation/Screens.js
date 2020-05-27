@@ -20,6 +20,7 @@ import Articles from "../screens/Articles";
 import Donnees from "../screens/Donnees";
 import Login from "../screens/Login";
 import EditProfile from "../screens/EditProfile";
+import CatMessages from "../screens/CatMessages";
 import Param from "../screens/Param";
 // drawer
 import CustomDrawerContent from "./Menu";
@@ -74,6 +75,22 @@ function MessagesStack(props) {
       <Stack.Screen
         name="Messages"
         component={Messages}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Messages" navigation={navigation} scene={scene} back={true}/>
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" }
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function CatMessagesStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="CatMessages"
+        component={CatMessages}
         options={{
           header: ({ navigation, scene }) => (
             <Header title="Messages" navigation={navigation} scene={scene} />
@@ -301,6 +318,7 @@ function AppStack(props) {
       <Drawer.Screen name="Account" component={RegisterStack} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Messages" component={MessagesStack} />
+      <Drawer.Screen name="CatMessages" component={CatMessagesStack} />
       <Drawer.Screen name="EditProfile" component={EditProfileStack} />
       <Drawer.Screen name="AddCasContact" component={AddCasContactStack} />
       <Drawer.Screen name="Param" component={ParamStack} />

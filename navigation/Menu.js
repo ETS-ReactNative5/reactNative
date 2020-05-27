@@ -17,10 +17,10 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     {title: "Profile", name: "Profile"},
     // {title: "Account", name: "Account"},
     // {title: "Elements", name: "Elements"},
-    {title: "Messages", name: "Messages"},
+    {title: "CatMessages", name: "CatMessages"},
     {title: "Articles", name: "Données"}
   ];
-  return (
+  return ( 
     <Block
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}

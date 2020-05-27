@@ -24,6 +24,27 @@ export const login = async (obj) => {
       console.log(error);    
     }); 
 }
+
+export const getAllMessages = async (id) => {
+  return await axios.get(baseUri+'/api_v1/apis/'+id+'/pagemessage.json', { headers: { "Content-type": "application/json" } })
+    .then( (response) => {
+      console.log(" =================",response); 
+      return response.data;
+    })
+    .catch( (error) => {
+      console.log(error);    
+    }); 
+}
+export const getOneMessages = async (id1,id2) => {
+  return await axios.get(baseUri+'/api_v1/conversations/'+id1+'/recepteurs/'+id2+'.json', { headers: { "Content-type": "application/json" } })
+    .then( (response) => {
+      console.log(" ====== response messages ===========",response); 
+      return response
+    })
+    .catch( (error) => {
+      console.log(error);    
+    }); 
+}
 export const onSaveActivity = async (id, obj, idpers) => {
   console.log('in sactiviter', baseUri+'/api_v1/diagnostiques/'+id+'.json')
   return await axios.post(baseUri+'/api_v1/diagnostiques/'+id+'.json', obj , { headers: { "Content-type": "application/json" } })

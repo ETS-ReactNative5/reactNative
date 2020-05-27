@@ -54,7 +54,7 @@ class Donnees extends React.Component {
                     item={diag} horizontal key={ind} 
                     indexState={this.state.currentIndex}
                     index={ind}
-                  />  : null 
+                  />  : null  
                   )
                 })
             }
