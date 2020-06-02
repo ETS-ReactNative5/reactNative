@@ -62,7 +62,7 @@ class Param extends React.Component {
           contact: this.state.contact
         }
     }
-    console.log('this.props.data.user.personne.id', this.props.data.user.personne)
+    console.log('this.props.data.user.personne.id', ob)
     let rs = await onSaveActivity(this.props.data.user.personne.id, ob, this.props.id);
     //let data = await getPersonalData('/api_v1/apis/'+this.props.id+'/profiles.json');
     console.log('rsrsrsrsrsrsrsrs rs',rs)

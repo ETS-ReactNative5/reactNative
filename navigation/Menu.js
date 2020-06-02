@@ -6,19 +6,19 @@ import {
   Image
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
-
+ 
 import Images from "../constants/Images"; 
 import { DrawerItem as DrawerCustomItem } from '../components';
 
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
   const insets = useSafeArea();
   const screens = [
-    {title: "Home", name: "Journal"}, 
-    {title: "Profile", name: "Profile"},
-    // {title: "Account", name: "Account"},
-    // {title: "Elements", name: "Elements"},
-    {title: "CatMessages", name: "CatMessages"},
-    {title: "Articles", name: "Données"}
+    {title: "Home", name: "Journal", title1: "CatMessages"}, 
+    {title: "Profile", name: "Profile", title1: "CatMessages"},
+    // {title: "Account", name: "Account"}, 
+    // {title: "Elements", name: "Account"},
+    {title: "Account", name: "Messages", title1: "CatMessages"},
+    {title: "Articles", name: "Données", title1: "CatMessages"}
   ];
   return ( 
     <Block
@@ -33,8 +33,9 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
           {screens.map((item, index) => {
               return (
                 <DrawerCustomItem
+                 title1={item.title1}
                   title={item.title}
-                  display={item.name}
+                  display={item.name} 
                   key={index}
                   navigation={navigation}
                   focused={state.index === index ? true : false}

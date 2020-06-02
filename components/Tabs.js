@@ -82,7 +82,16 @@ export default class Tabs extends React.Component {
             styles.menuTitle,
             { color: textColor }
           ]}
-          onPress={() => this.selectMenu(item.id)}>
+          onPress={() => {
+              if(item.id!== 'mesure')  {
+                this.selectMenu(item.id);
+              } 
+              else{
+                 this.selectMenu(item.id)
+                 this.prop.navigat();
+               }
+            }}
+          >
           {item.title}
         </Animated.Text>
       </Block>

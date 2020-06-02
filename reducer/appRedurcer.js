@@ -9,7 +9,8 @@ initialState = {
 	casContact: null,
 	id: 0,
 	idMed: null,
-	mess: []
+	mess: null,
+	header: false,
 }
 
 function app(state = initialState, action) {
@@ -41,12 +42,17 @@ function app(state = initialState, action) {
 	    case 'TO_SET_ID_MEDECIN':
 	  		curentState = {...curentState, idMed: action.data, mess: action.mess}
 	      	return curentState;
+	    case 'HEADER':
+	  		curentState = {...curentState, header: action.data}
+	      	return curentState;
 	    case 'ADD_DATA':
-	    	let slice = state.data.user.diagnostiques;
+	    	let slice = state.data.user.diagnostiques;;
 	    	console.log('after op', slice.length)
-	    	slice.push(action.data)
+	    	slice.push(action.data.diagnostique)
 	    	console.log('before op', slice.length)
-	  		curentState = {...curentState, 
+	    	console.log('before op slice', slice)
+	    	console.log('data', slice.diagnostique)
+	  		curentState = {...curentState,  
 	  			data: {...curentState.data, 
 	  			user: {...curentState.data.user,
 	  			diagnostiques: slice

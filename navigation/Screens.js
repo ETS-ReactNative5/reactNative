@@ -307,11 +307,11 @@ function AppStack(props) {
         },
         labelStyle: {
           fontSize: 18,
-          marginLeft: 12,
+          marginLeft: 12,  
           fontWeight: "normal"
         }
       }}
-      initialRouteName="Home"
+      initialRouteName="Home" 
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />

@@ -12,9 +12,14 @@ import { connect } from 'react-redux'
 import LoadingView from 'react-native-loading-view'
  
 const { width } = Dimensions.get("screen");
+import { useIsFocused } from '@react-navigation/native';
 
+function Messages(props){
+  const isFocused = useIsFocused();
+  return <MessagesDetail {...props} isFocused={isFocused} />;
+}
 
-class Messages extends React.Component {
+class MessagesDetail extends React.Component {
 
   constructor(props){
     super(props);
@@ -27,7 +32,7 @@ class Messages extends React.Component {
   }
 
   async componentDidMount() {
-      console.log('componentDidMount componentDidMount',this.props.idMed)
+           // console.log('componentDidMount componentDidMount',this.props.idMed)
       //let mess = await getOneMessages(this.props.id, this.props.idMed)
       //console.log('messages', mess)
       let messages = [
@@ -123,11 +128,17 @@ class Messages extends React.Component {
       messages: GiftedChat.append(previousState.messages, mess),
     }));
   }
+  loadMessage = async() =>{
+    console.log('before messages')
+    let converation = await getOneMessages(this.props.id, this.props.idMed);
+    console.log('this.messages', converation)
+  }
  
   render() {
-    console.log('this.props.mess', this.props.mess)
+    const { isFocused } = this.props;
+      isFocused ? this.loadMessage() : console.log("is not focused")
+ 
     return (
-        <LoadingView loading={this.props.mess === null}>
           <GiftedChat
             messages={this.state.messages}
             onSend={messages => {this.addMessages(messages); console.log(this.state.messages)}}
@@ -135,7 +146,6 @@ class Messages extends React.Component {
               _id: 1,
             }}
           />
-        </LoadingView>
     );
   }
 }

@@ -15,7 +15,6 @@ import { baseUri } from "./StatteFullComponents";
 import { Card } from '../components';
 import LoadingView from 'react-native-loading-view'
 import { connect } from 'react-redux'
-import { getOneMessages } from "./StatteFullComponents";
 
 
 class CatMessages extends React.Component {
@@ -71,11 +70,13 @@ class CatMessages extends React.Component {
                   key={i}
                   leftAvatar={{ source: { uri: base+l.medecin.personne.image } }}
                   title={l.medecin.personne.prenom+' '+l.medecin.personne.nom}
-                  subtitle={()=>{
-                    const ls = l.medecin.personne.envoyes.length;
-                    let item = l.medecin.personne.envoyes.slice(ls-1, ls)[0]
-                    return <Text>{item.message.slice(0, 33)}{item.message.length > 33  ? "...": null}</Text>;
-                  }}
+                  subtitle={"hhhhhhhhhhhh"
+                  //   ()=>{
+                  //   const ls = l.medecin.personne.envoyes.length;
+                  //   let item = l.medecin.personne.envoyes.slice(ls-1, ls)[0]
+                  //   return <Text>{item.message.slice(0, 33)}{item.message.length > 33  ? "...": null}</Text>;
+                  // }
+                }
                   bottomDivider
                   chevron
                   onPress={()=>{
@@ -152,8 +153,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     toSetIdMedecin: async (id, id1) => {
-      let mass = await getOneMessages(id1, id)
-      dispatch({type: "TO_SET_ID_MEDECIN", data: id, mess: mass}); 
+      dispatch({type: "TO_SET_ID_MEDECIN", data: id, mess: null}); 
     },
   };
 }

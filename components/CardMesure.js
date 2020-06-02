@@ -29,10 +29,11 @@ class CardMesure extends React.Component {
       horizontal ? styles.horizontalStyles : styles.verticalStyles,
       styles.shadow
     ];
-
+    let date = Date();
+    let tDate = new Date(date).toLocaleDateString('fr-CA') +' '+ new Date(date).getHours()+':' +new Date(date).getMinutes();
     return ( 
       <Block row={horizontal} card flex style={cardContainer}>
-        <Modals item={this.props.item} indexState={this.props.indexState} index={this.props.index}/>
+        <Modals tDate={tDate} item={this.props.item} indexState={this.props.indexState} index={this.props.index}/>
         <TouchableWithoutFeedback onPress={() => {this.props.showDetail(1); console.log("on pass")}}>
           <Block flex space="between" style={styles.cardDescription}>
             <Text size={14} style={styles.cardTitle} style={{textAlign: "center"}}>
@@ -40,7 +41,7 @@ class CardMesure extends React.Component {
             	 this.props.item.datesave: null
               }
               {this.props.item.datesave ?
-                 null : Date()
+                 null : tDate
               }
             </Text>
             <Text size={13} style={{ textAlign: "center"}}>
@@ -99,7 +100,7 @@ class Modals extends React.Component {
           onSwipeOut={() => this.setState({ bottomModalAndTitle: false })}
           modalTitle={
             <ModalTitle
-              title={this.state.item !== null ? this.state.item.datesave : null}
+              title={this.state.item !== null ? this.state.item.datesave : this.props.tDate}
               hasTitleBar
             />
           }

@@ -36,6 +36,7 @@ export const getAllMessages = async (id) => {
     }); 
 }
 export const getOneMessages = async (id1,id2) => {
+  console.log(baseUri+'/api_v1/conversations/'+id1+'/recepteurs/'+id2+'.json')
   return await axios.get(baseUri+'/api_v1/conversations/'+id1+'/recepteurs/'+id2+'.json', { headers: { "Content-type": "application/json" } })
     .then( (response) => {
       console.log(" ====== response messages ===========",response); 
